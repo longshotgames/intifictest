@@ -34,7 +34,7 @@ def publishFunction(subDir, region, branch):
                 versionNum = int(version['Version'])
         except:
             print "skipping " + version['Version']
-    cmd = "aws lambda upate-alias --region " + region + " --function-name " + subDir + " --name " + branch + " --function-version " + str(versionNum)
+    cmd = "aws lambda update-alias --region " + region + " --function-name " + subDir + " --name " + branch + " --function-version " + str(versionNum)
     subprocess.check_output(cmd, shell=True)
 
 if __name__ == "__main__":
