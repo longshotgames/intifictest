@@ -29,9 +29,11 @@ def publishFunction(subDir, region, branch):
     versionsJson = json.loads(versions)
     versionNum = 0
     for version in versionsJson['Versions']:
-        if (int(version['Version']) > versionNum):
-            versionNum = int(version['Version'])
-
+        try:
+            if (int(version['Version']) > versionNum):
+                versionNum = int(version['Version'])
+        except:
+            print "skipping " + version['Version']
     cmd = "aws lambda upate-alias --region " + region + " --function-name " + subDir + " --name " + branch + " --function-version " + str(versionNum)
     subprocess.check_output(cmd, shell=True)
 
